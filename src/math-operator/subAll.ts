@@ -1,9 +1,9 @@
 import {sub} from './sub'
+import {validateParameters} from "../helpers/validateParameters";
+import {operationAll} from "../helpers/operationAll";
 
 export const subAll = (...values: number[]): number => {
-    let total = 0
-    for (const value of values) {
-        total = sub(total, value)
-    }
-    return total
+    values.forEach((value) => validateParameters(value))
+    return operationAll(sub, ...values)
 }
+

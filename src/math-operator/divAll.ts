@@ -1,9 +1,8 @@
 import {div} from './div'
+import {validateParameters} from "../helpers/validateParameters";
+import {operationAll} from "../helpers/operationAll";
 
 export const divAll = (...values: number[]): number => {
-    let total = 0
-    for (const value of values) {
-        total = div(total, value)
-    }
-    return total
+    values.forEach((value) => validateParameters(value))
+    return operationAll(div, ...values)
 }

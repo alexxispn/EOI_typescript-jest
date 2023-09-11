@@ -1,9 +1,8 @@
 import {multiply} from './multiply'
+import {validateParameters} from "../helpers/validateParameters";
+import {operationAll} from "../helpers/operationAll";
 
 export const multiplyAll = (...values: number[]): number => {
-    let total = 0
-    for (const value of values) {
-        total = multiply(total, value)
-    }
-    return total
+    values.forEach((value) => validateParameters(value))
+    return operationAll(multiply, ...values)
 }
