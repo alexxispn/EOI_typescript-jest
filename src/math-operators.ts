@@ -1,19 +1,28 @@
-function sum(a: number, b: number): number {
-    return a + b;
+import {throwIfNaN} from "./throwIfNaN";
+import {throwIfResultIsTooBigOrTooSmall} from "./throwIfResultIsTooBigOrTooSmall";
+
+export const sum = (a: number, b: number): number => {
+    throwIfNaN(a, b)
+    const result = a + b
+    throwIfResultIsTooBigOrTooSmall(result)
+    const roundedResult = Math.round(result * 1000000000000000) / 1000000000000000
+    if (result < 1) return roundedResult
+    return result
 }
 
-function sub(a: number, b: number): number {
-    return a - b;
+export const sub = (a: number, b: number): number => {
+    throwIfNaN(a, b)
+    return a - b
 }
 
-function multiply(a: number, b: number): number {
-    return a * b;
+export const multiply = (a: number, b: number): number => {
+    throwIfNaN(a, b)
+    return a * b
 }
 
-function div(a: number, b: number): number {
-    return a / b;
+export const div = (a: number, b: number): number => {
+    throwIfNaN(a, b)
+    return a / b
 }
 
 // To Implement: sumAll, subAll, multiplyAll, divAll
-
-export { sum, sub, multiply, div };
