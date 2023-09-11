@@ -3,6 +3,8 @@ import {throwIfNumberIsTooBigOrTooSmall} from "../helpers/throwIfNumberIsTooBigO
 
 export const sum = (a: number, b: number): number => {
     throwIfNaN(a, b)
+    throwIfNumberIsTooBigOrTooSmall(a)
+    throwIfNumberIsTooBigOrTooSmall(b)
     const result = a + b
     throwIfNumberIsTooBigOrTooSmall(result)
     const roundedResult = Math.round(result * 1000000000000000) / 1000000000000000
