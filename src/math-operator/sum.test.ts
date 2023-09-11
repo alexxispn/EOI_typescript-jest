@@ -2,9 +2,7 @@ import {sum} from "./sum"
 import {ERROR_NAN, ERROR_NUMBER_IS_TOO_BIG_OR_TOO_SMALL} from "../constants";
 import {throwIfNaN} from "../helpers/throwIfNaN";
 import {throwIfNumberIsTooBigOrTooSmall} from "../helpers/throwIfNumberIsTooBigOrTooSmall";
-
-const mockThrowIfNaN = throwIfNaN as jest.MockedFunction<typeof throwIfNaN>
-const mockThrowIfNumberIsTooBigOrTooSmall = throwIfNumberIsTooBigOrTooSmall as jest.MockedFunction<typeof throwIfNumberIsTooBigOrTooSmall>
+import mocked = jest.mocked;
 
 jest.mock('../helpers/throwIfNaN', () => ({
     throwIfNaN: jest.fn()
@@ -15,13 +13,13 @@ jest.mock('../helpers/throwIfNumberIsTooBigOrTooSmall', () => ({
 }))
 
 beforeEach(() => {
-    mockThrowIfNaN.mockReset()
-    mockThrowIfNumberIsTooBigOrTooSmall.mockReset()
+    mocked(throwIfNaN).mockReset()
+    mocked(throwIfNumberIsTooBigOrTooSmall).mockReset()
 })
 
 describe('sum', () => {
     it('should return a NaN_ERROR if any of the parameters is NaN', () => {
-        mockThrowIfNaN.mockImplementation(() => {
+        mocked(throwIfNaN).mockImplementation(() => {
             throw new Error(ERROR_NAN)
         })
 
@@ -29,7 +27,7 @@ describe('sum', () => {
     })
 
     it('should return an ERROR_NUMBER_IS_TOO_BIG_OR_TOO_SMALL if the result is too big or too small', () => {
-        mockThrowIfNumberIsTooBigOrTooSmall.mockImplementation(() => {
+        mocked(throwIfNumberIsTooBigOrTooSmall).mockImplementation(() => {
             throw new Error(ERROR_NUMBER_IS_TOO_BIG_OR_TOO_SMALL)
         })
         const bigNumber = 9007199254740992
